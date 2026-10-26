@@ -25,16 +25,10 @@
             --card-w: 260px;
             --card-h: 340px;
             --ring-radius: 300px;
-            /* Extra height on ring-stage. Tuned so the perspective-scaled
-               front card lands exactly on the hero's bottom edge. */
             --ring-stage-pad: 94px;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Poppins', sans-serif;
@@ -72,6 +66,7 @@
             margin: 0 auto;
         }
 
+        /* FIX: everything hugs the LEFT edge */
         .nav-container {
             width: 100%;
             max-width: 1200px;
@@ -79,13 +74,15 @@
             padding: 0 1rem;
             display: flex;
             align-items: center;
-            justify-content: flex-end;
+            justify-content: flex-start;
             height: 100%;
         }
 
+        /* FIX: hamburger no longer pushes the list away */
         #menu-toggle {
             display: none;
-            margin-right: auto;
+            margin-right: 0.5rem;
+            margin-left: 0;
             font-size: 0.9rem;
             line-height: 1;
             background: transparent;
@@ -123,6 +120,23 @@
             font-size: 0.75rem;
         }
 
+        /* FIX: dropdown opens from the LEFT, directly under the button */
+        #nav-links.open {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            position: absolute;
+            top: 22px;
+            left: 1rem;
+            right: auto;
+            padding: 1rem;
+            background: var(--hero-green);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            gap: 1rem;
+            z-index: 999;
+        }
+
         /* Buttons */
         .btn {
             display: inline-block;
@@ -136,11 +150,7 @@
             font-size: 16px;
         }
 
-        .btn-primary {
-            background-color: var(--primary);
-            color: white;
-        }
-
+        .btn-primary { background-color: var(--primary); color: white; }
         .btn-primary:hover {
             background-color: var(--light);
             transform: translateY(-3px);
@@ -152,7 +162,6 @@
             border: 2px solid var(--primary);
             color: var(--primary);
         }
-
         .btn-secondary:hover {
             background-color: var(--primary);
             color: white;
@@ -299,7 +308,6 @@
             gap: 10px;
             margin-top: 8px;
             margin-left: 5%;
-            /* Reduced so the buttons sit close to the seam */
             padding: 0 20px 16px 20px;
         }
 
@@ -368,7 +376,6 @@
             .hero-lady { max-width: 260px; }
             .headline-right { font-size: 0.95rem; padding: 6px 14px; }
 
-            /* Stack the two CTAs so they don't collide with the rising cards */
             .hero-btns {
                 flex-direction: column;
                 align-items: stretch;
@@ -383,8 +390,6 @@
         /* ===== ROTATING CARDS ===== */
         .rotating-cards {
             position: relative;
-            /* No top padding: the ring-stage pad below is tuned so the
-               perspective-scaled front card kisses the hero's bottom edge. */
             padding: 0 0 60px;
             background:
                 radial-gradient(circle at 50% 0%, rgba(74, 124, 63, 0.35) 0%, transparent 60%),
@@ -475,17 +480,8 @@
             flex: 1;
         }
 
-        .rot-card-body h3 {
-            font-size: 1.05rem;
-            color: var(--accent);
-            line-height: 1.25;
-        }
-
-        .rot-card-body p {
-            font-size: 0.8rem;
-            color: #cfd8cc;
-            line-height: 1.45;
-        }
+        .rot-card-body h3 { font-size: 1.05rem; color: var(--accent); line-height: 1.25; }
+        .rot-card-body p { font-size: 0.8rem; color: #cfd8cc; line-height: 1.45; }
 
         .rot-card-tag {
             margin-top: auto;
@@ -510,14 +506,9 @@
                 --card-w: 195px;
                 --card-h: 265px;
                 --ring-radius: 220px;
-                /* Smaller scale-up on mobile (1000px perspective, 220px radius)
-                   so a smaller pad lands the card on the hero edge. */
                 --ring-stage-pad: 78px;
             }
-            .rotating-cards {
-                padding: 0 0 45px;
-                border-radius: 28px 28px 0 0;
-            }
+            .rotating-cards { padding: 0 0 45px; border-radius: 28px 28px 0 0; }
             .ring-stage { perspective: 1000px; }
             .rot-card-body { padding: 10px 12px 12px; }
             .rot-card-body h3 { font-size: 0.92rem; }
@@ -572,25 +563,10 @@
                         z-index 0.8s ease;
         }
 
-        .carousel-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
+        .carousel-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-        .carousel-item.prev {
-            transform: translateX(-75%) scale(0.8);
-            opacity: 0.7;
-            z-index: 1;
-        }
-
-        .carousel-item.next {
-            transform: translateX(75%) scale(0.8);
-            opacity: 0.7;
-            z-index: 1;
-        }
-
+        .carousel-item.prev { transform: translateX(-75%) scale(0.8); opacity: 0.7; z-index: 1; }
+        .carousel-item.next { transform: translateX(75%) scale(0.8); opacity: 0.7; z-index: 1; }
         .carousel-item.active {
             transform: translateX(0) scale(1);
             opacity: 1;
@@ -617,10 +593,7 @@
             transition: all 0.3s ease;
         }
 
-        .carousel-dot.active {
-            background-color: var(--accent);
-            transform: scale(1.2);
-        }
+        .carousel-dot.active { background-color: var(--accent); transform: scale(1.2); }
 
         .carousel-arrows {
             position: absolute;
@@ -647,22 +620,12 @@
             transition: all 0.3s ease;
         }
 
-        .carousel-arrow:hover {
-            background-color: var(--accent);
-            color: var(--primary);
-        }
+        .carousel-arrow:hover { background-color: var(--accent); color: var(--primary); }
 
         /* Clients */
-        .clients {
-            padding: 60px 0;
-            background-color: var(--light);
-        }
+        .clients { padding: 60px 0; background-color: var(--light); }
 
-        .section-title {
-            text-align: center;
-            margin-bottom: 50px;
-            position: relative;
-        }
+        .section-title { text-align: center; margin-bottom: 50px; position: relative; }
 
         .section-title h2 {
             font-size: 2.5rem;
@@ -691,22 +654,11 @@
             align-items: center;
         }
 
-        .client-logo {
-            height: 60px;
-            opacity: 0.7;
-            transition: opacity 0.3s ease, transform 0.3s ease;
-        }
-
-        .client-logo:hover {
-            opacity: 1;
-            transform: translateY(-5px);
-        }
+        .client-logo { height: 60px; opacity: 0.7; transition: opacity 0.3s ease, transform 0.3s ease; }
+        .client-logo:hover { opacity: 1; transform: translateY(-5px); }
 
         /* What We Do */
-        .what-we-do {
-            padding: 100px 0;
-            background: #1a1a1a;
-        }
+        .what-we-do { padding: 100px 0; background: #1a1a1a; }
 
         .services {
             display: grid;
@@ -741,18 +693,9 @@
             background-color: rgba(255, 209, 102, 0.1);
         }
 
-        .service-content {
-            padding: 30px;
-        }
-
-        .service-content h3 {
-            margin-bottom: 15px;
-            color: var(--accent);
-        }
-
-        .service-content p {
-            color: #ddd;
-        }
+        .service-content { padding: 30px; }
+        .service-content h3 { margin-bottom: 15px; color: var(--accent); }
+        .service-content p { color: #ddd; }
 
         /* How It Works */
         .how-it-works {
@@ -766,10 +709,8 @@
         .how-it-works::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 C50,100 50,0 100,100 L100,0 Z" fill="rgba(255,107,107,0.05)"/></svg>');
             background-size: cover;
             opacity: 0.3;
@@ -797,10 +738,7 @@
             transition: transform 0.3s ease;
         }
 
-        .step-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent);
-        }
+        .step-card:hover { transform: translateY(-10px); border-color: var(--accent); }
 
         .step-number {
             font-size: 3rem;
@@ -810,19 +748,11 @@
             opacity: 0.8;
         }
 
-        .step-card h3 {
-            margin-bottom: 20px;
-            font-size: 1.5rem;
-            color: #fff;
-        }
-
+        .step-card h3 { margin-bottom: 20px; font-size: 1.5rem; color: #fff; }
         .step-card p { color: #ddd; }
 
         /* Why Us */
-        .why-us {
-            padding: 100px 0;
-            background-color: #000000;
-        }
+        .why-us { padding: 100px 0; background-color: #000000; }
 
         .advantages {
             display: grid;
@@ -847,17 +777,8 @@
             border-color: var(--accent);
         }
 
-        .advantage-icon {
-            font-size: 3rem;
-            color: var(--accent);
-            margin-bottom: 25px;
-        }
-
-        .advantage-card h3 {
-            color: var(--accent);
-            margin-bottom: 15px;
-        }
-
+        .advantage-icon { font-size: 3rem; color: var(--accent); margin-bottom: 25px; }
+        .advantage-card h3 { color: var(--accent); margin-bottom: 15px; }
         .advantage-card p { color: #ddd; }
 
         /* CTA */
@@ -873,52 +794,27 @@
         .cta::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><circle cx="50" cy="50" r="40" fill="rgba(255,255,255,0.1)" /></svg>');
             background-size: 80%;
             background-position: center;
             opacity: 0.3;
         }
 
-        .cta h2 {
-            font-size: 2.8rem;
-            margin-bottom: 20px;
-        }
+        .cta h2 { font-size: 2.8rem; margin-bottom: 20px; }
+        .cta p { font-size: 1.2rem; max-width: 700px; margin: 0 auto 40px; opacity: 0.9; }
 
-        .cta p {
-            font-size: 1.2rem;
-            max-width: 700px;
-            margin: 0 auto 40px;
-            opacity: 0.9;
-        }
+        .cta-btns { display: flex; justify-content: center; gap: 20px; margin-top: 30px; }
 
-        .cta-btns {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 30px;
-        }
-
-        .btn-light {
-            background-color: var(--accent);
-            color: var(--primary);
-        }
-
+        .btn-light { background-color: var(--accent); color: var(--primary); }
         .btn-light:hover {
             background-color: var(--light);
             transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
         }
 
-        .btn-outline-light {
-            background-color: transparent;
-            border: 2px solid white;
-            color: white;
-        }
-
+        .btn-outline-light { background-color: transparent; border: 2px solid white; color: white; }
         .btn-outline-light:hover {
             background-color: var(--light);
             color: var(--primary);
@@ -927,11 +823,7 @@
         }
 
         /* Footer */
-        footer {
-            background-color: var(--dark);
-            color: rgba(255, 255, 255, 0.7);
-            padding: 70px 0 30px;
-        }
+        footer { background-color: var(--dark); color: rgba(255, 255, 255, 0.7); padding: 70px 0 30px; }
 
         .footer-content {
             display: grid;
@@ -948,15 +840,9 @@
             display: inline-block;
         }
 
-        .footer-about p {
-            margin-bottom: 20px;
-            color: #ddd;
-        }
+        .footer-about p { margin-bottom: 20px; color: #ddd; }
 
-        .social-links {
-            display: flex;
-            gap: 15px;
-        }
+        .social-links { display: flex; gap: 15px; }
 
         .social-links a {
             display: flex;
@@ -987,23 +873,19 @@
         .footer-heading::after {
             content: '';
             position: absolute;
-            bottom: 0;
-            left: 0;
+            bottom: 0; left: 0;
             width: 40px;
             height: 2px;
             background-color: var(--accent);
         }
 
         .footer-links { list-style: none; }
-
         .footer-links li { margin-bottom: 12px; }
-
         .footer-links a {
             color: rgba(255, 255, 255, 0.7);
             text-decoration: none;
             transition: color 0.3s ease;
         }
-
         .footer-links a:hover { color: var(--accent); }
 
         .copyright {
@@ -1053,12 +935,12 @@
     <nav id="navbar">
         <div class="nav-container">
 
-            <!-- Hamburger (mobile only) -->
-            <button onclick="toggleMenu()" id="menu-toggle" aria-label="Toggle menu">
+            <!-- Hamburger (mobile only) — LEFT -->
+            <button onclick="toggleMenu()" id="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
                 <i class="fas fa-bars"></i>
             </button>
 
-            <!-- Menu only -->
+            <!-- Menu — also LEFT -->
             <ul id="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="solutions.html">Solutions</a></li>
@@ -1073,13 +955,11 @@
     <!-- Hero Section — foliage green -->
     <section class="hero">
         <div class="hero-container">
-            <!-- LEFT: text -->
             <div class="hero-column">
                 <p class="hero-text"> Data+ </p>
                 <p class="hero-paragraph">At meal Carta we articulate the right environment with the right data .</p>
             </div>
 
-            <!-- RIGHT: top badge + lady -->
             <div class="hero-column">
                 <div class="headline-right"> mealcarta </div>
                 <img src="https://i.ibb.co/1Y0bbvLp/360-F-1215496106-e5-Yof-F2p-WZTA6-Dxq-TEPzg2k-BCRZUp8q1-removebg-preview-removebg-preview.png"
@@ -1157,7 +1037,6 @@
 
             </div>
         </div>
-
     </section>
 
     <!-- Clients -->
@@ -1335,40 +1214,18 @@
     </footer>
 
     <script>
-        // Toggle menu for mobile
+        // Toggle menu for mobile — all positioning handled in CSS
         function toggleMenu() {
             const links = document.getElementById('nav-links');
-            if (links.style.display === 'flex' || links.style.display === '') {
-                links.style.display = 'none';
-            } else {
-                links.style.display = 'flex';
-                links.style.flexDirection = 'column';
-                links.style.background = 'var(--hero-green)';
-                links.style.position = 'absolute';
-                links.style.top = '22px';
-                links.style.right = '1rem';
-                links.style.padding = '1rem';
-                links.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
-                links.style.zIndex = '999';
-                links.style.gap = '1rem';
-                links.style.borderRadius = '5px';
-            }
+            const toggle = document.getElementById('menu-toggle');
+            const isOpen = links.classList.toggle('open');
+            toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
         }
 
-        // Responsive behavior
+        // Close the dropdown if the viewport grows past mobile
         function handleResize() {
-            const links = document.getElementById('nav-links');
-            const toggle = document.getElementById('menu-toggle');
-            if (window.innerWidth <= 768) {
-                toggle.style.display = 'block';
-                links.style.display = 'none';
-            } else {
-                toggle.style.display = 'none';
-                links.style.display = 'flex';
-                links.style.flexDirection = 'row';
-                links.style.position = 'static';
-                links.style.boxShadow = 'none';
-                links.style.background = 'transparent';
+            if (window.innerWidth > 768) {
+                document.getElementById('nav-links').classList.remove('open');
             }
         }
 
@@ -1411,4 +1268,4 @@
         });
     </script>
 </body>
-  </html>
+            </html>
